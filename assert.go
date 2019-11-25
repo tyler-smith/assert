@@ -4,46 +4,46 @@ import (
 	"testing"
 )
 
-func True(t *testing.T, a bool) {
-	if !a {
+func True(t *testing.T, given bool) {
+	if !given {
 		t.Fatal("Should be true but was false")
 	}
 }
 
-func False(t *testing.T, a bool) {
-	True(t, !a)
+func False(t *testing.T, given bool) {
+	True(t, !given)
 }
 
-func EqualString(t *testing.T, a, b string) {
-	if a != b {
-		t.Fatal("Strings not equal. Wanted:", a, "\nGot:", b)
+func EqualString(t *testing.T, expected, given string) {
+	if expected != given {
+		t.Fatal("Strings not equal. Wanted:", expected, "\nGot:", given)
 	}
 }
 
-func EqualError(t *testing.T, a, b error) {
-	if a != b {
-		t.Fatal("Errors not equal. Wanted:", a, "\nGot:", b)
+func EqualError(t *testing.T, expected, given error) {
+	if expected != given {
+		t.Fatal("Errors not equal. Wanted:", expected, "\nGot:", given)
 	}
 }
 
-func EqualInt(t *testing.T, a, b int) {
-	if a != b {
-		t.Fatal("Ints not equal. Wanted:", a, "\nGot:", b)
+func EqualInt(t *testing.T, expected, given int) {
+	if expected != given {
+		t.Fatal("Ints not equal. Wanted:", expected, "\nGot:", given)
 	}
 }
 
-func IntsWithin(t *testing.T, a, b, delta int) {
-	a -= b
-	if a < 0 {
-		a *= -1
+func IntsWithin(t *testing.T, expected, given, delta int) {
+	expected -= given
+	if expected < 0 {
+		expected *= -1
 	}
-	if a > delta {
-		t.Fatal("Ints not close enough. Wanted", a, "to be within", delta, "of", b)
+	if expected > delta {
+		t.Fatal("Ints not close enough. Wanted", expected, "to be within", delta, "of", given)
 	}
 }
 
-func NotNil(t *testing.T, a interface{}) {
-	if a == nil {
+func NotNil(t *testing.T, given interface{}) {
+	if given == nil {
 		t.Fatal("Should not be nil.")
 	}
 }
