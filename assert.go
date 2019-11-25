@@ -11,7 +11,9 @@ func True(t *testing.T, given bool) {
 }
 
 func False(t *testing.T, given bool) {
-	True(t, !given)
+	if given {
+		t.Fatal("Should be false but was true")
+	}
 }
 
 func EqualString(t *testing.T, expected, given string) {
