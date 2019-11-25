@@ -16,15 +16,35 @@ func False(t *testing.T, given bool) {
 	}
 }
 
-func EqualString(t *testing.T, expected, given string) {
-	if expected != given {
-		t.Fatal("Strings not equal. Wanted:", expected, "\nGot:", given)
+func Nil(t *testing.T, given interface{}) {
+	if given != nil {
+		t.Fatal("Should be nil.")
+	}
+}
+
+
+func NotNil(t *testing.T, given interface{}) {
+	if given == nil {
+		t.Fatal("Should not be nil.")
 	}
 }
 
 func EqualError(t *testing.T, expected, given error) {
 	if expected != given {
 		t.Fatal("Errors not equal. Wanted:", expected, "\nGot:", given)
+	}
+}
+
+func NoError(t *testing.T, err error) {
+	if err != nil {
+		t.Fatal("Error should be nil but was:", err.Error())
+	}
+}
+
+
+func EqualString(t *testing.T, expected, given string) {
+	if expected != given {
+		t.Fatal("Strings not equal. Wanted:", expected, "\nGot:", given)
 	}
 }
 
@@ -41,17 +61,5 @@ func IntsWithin(t *testing.T, expected, given, delta int) {
 	}
 	if expected > delta {
 		t.Fatal("Ints not close enough. Wanted", expected, "to be within", delta, "of", given)
-	}
-}
-
-func NotNil(t *testing.T, given interface{}) {
-	if given == nil {
-		t.Fatal("Should not be nil.")
-	}
-}
-
-func NoError(t *testing.T, err error) {
-	if err != nil {
-		t.Fatal("Error should be nil but was:", err.Error())
 	}
 }
