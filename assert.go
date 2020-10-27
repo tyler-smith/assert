@@ -1,6 +1,7 @@
 package assert
 
 import (
+	"bytes"
 	"testing"
 )
 
@@ -22,16 +23,9 @@ func Nil(t *testing.T, given interface{}) {
 	}
 }
 
-
 func NotNil(t *testing.T, given interface{}) {
 	if given == nil {
 		t.Fatal("Should not be nil.")
-	}
-}
-
-func EqualError(t *testing.T, expected, given error) {
-	if expected != given {
-		t.Fatal("Errors not equal. Wanted:", expected, "\nGot:", given)
 	}
 }
 
@@ -41,6 +35,11 @@ func NoError(t *testing.T, err error) {
 	}
 }
 
+func EqualError(t *testing.T, expected, given error) {
+	if expected != given {
+		t.Fatal("Errors not equal. Wanted:", expected, "\nGot:", given)
+	}
+}
 
 func EqualString(t *testing.T, expected, given string) {
 	if expected != given {
@@ -51,6 +50,12 @@ func EqualString(t *testing.T, expected, given string) {
 func EqualInt(t *testing.T, expected, given int) {
 	if expected != given {
 		t.Fatal("Ints not equal. Wanted:", expected, "\nGot:", given)
+	}
+}
+
+func EqualByteSlice(t *testing.T, expected, given []byte) {
+	if !bytes.Equal(expected, given) {
+		t.Fatal("Byte slices not equal. Wanted:", expected, "\nGot:", given)
 	}
 }
 
